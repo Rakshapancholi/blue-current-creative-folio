@@ -34,6 +34,7 @@ function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeService, setActiveService] = useState<number | null>(0);
   const [activeProject, setActiveProject] = useState<number | null>(null);
+  const selectedProject = activeProject === null ? undefined : projects[activeProject];
   return (
     <main>
       <section className="hero relative overflow-hidden bg-primary text-primary-foreground" id="home">
@@ -100,7 +101,7 @@ function Index() {
         <a href="mailto:hello@nautilius.studio" className="footer-cta flex items-center justify-between border-b border-primary-foreground/30"><span>Let’s make<br /><em>something matter.</em></span><ArrowUpRight className="footer-arrow" strokeWidth={1} /></a>
         <div className="footer-bottom flex flex-wrap items-end justify-between gap-6"><a href="#home" className="wordmark flex items-center gap-2">nautilius<Asterisk className="size-6" /></a><span className="eyebrow">© 2026 NAUTILIUS — ALL RIGHTS RESERVED</span><Button asChild size="icon" variant="ghost" className="rounded-full border border-primary-foreground/30 hover:bg-primary-foreground/10"><a href="#home" aria-label="Back to top"><ArrowUp /></a></Button></div>
       </footer>
-      {activeProject !== null && <div className="project-modal fixed inset-0 z-50 flex items-center justify-center bg-foreground/70 p-5" onClick={() => setActiveProject(null)}><div role="dialog" aria-modal="true" aria-label={projects[activeProject].name} className="relative max-h-[90vh] w-full max-w-3xl overflow-auto bg-background" onClick={event => event.stopPropagation()}><Button size="icon" variant="secondary" className="absolute right-3 top-3 z-10 rounded-full" aria-label="Close project" onClick={() => setActiveProject(null)}><X /></Button><img src={projects[activeProject].image} alt={projects[activeProject].name} className="max-h-[60vh] w-full object-cover" /><div className="p-7"><h2 className="text-3xl">{projects[activeProject].name}</h2><p className="mt-3 text-muted-foreground">{projects[activeProject].description}</p></div></div></div>}
+      {selectedProject && <div className="project-modal fixed inset-0 z-50 flex items-center justify-center bg-foreground/70 p-5" onClick={() => setActiveProject(null)}><div role="dialog" aria-modal="true" aria-label={selectedProject.name} className="relative max-h-[90vh] w-full max-w-3xl overflow-auto bg-background" onClick={event => event.stopPropagation()}><Button size="icon" variant="secondary" className="absolute right-3 top-3 z-10 rounded-full" aria-label="Close project" onClick={() => setActiveProject(null)}><X /></Button><img src={selectedProject.image} alt={selectedProject.name} className="max-h-[60vh] w-full object-cover" /><div className="p-7"><h2 className="text-3xl">{selectedProject.name}</h2><p className="mt-3 text-muted-foreground">{selectedProject.description}</p></div></div></div>}
     </main>
   );
 }
