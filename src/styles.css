@@ -229,3 +229,6 @@ footer { padding-top: 36px; padding-bottom: 30px; }
   .footer-bottom .eyebrow { order: 3; width: 100%; font-size: 8px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: 0s !important; } }
+.contact-input { display: block; width: 100%; margin-top: 8px; background: transparent; border: 0; border-bottom: 1px solid color-mix(in oklch, var(--primary-foreground) 45%, transparent); padding: 8px 0; color: inherit; outline: none; }
+.contact-input:focus { border-color: var(--primary-foreground); }
+.contact-input option { color: var(--foreground); }
