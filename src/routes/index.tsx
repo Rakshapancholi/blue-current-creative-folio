@@ -68,6 +68,7 @@ const fields: { name: string; label: string; type: string; required?: boolean; w
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [quote, setQuote] = useState(0);
+  const activeQuote = testimonials[quote] ?? testimonials[0]!;
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -188,8 +189,8 @@ function Index() {
       <section className="section-shell bg-primary py-24 text-primary-foreground" aria-label="Testimonials">
         <div className="eyebrow section-label">06 / KIND WORDS</div>
         <figure className="max-w-4xl">
-          <blockquote className="text-3xl leading-snug md:text-5xl">“{testimonials[quote].text}”</blockquote>
-          <figcaption className="mt-8 eyebrow">{testimonials[quote].name} — {testimonials[quote].role}</figcaption>
+          <blockquote className="text-3xl leading-snug md:text-5xl">“{activeQuote.text}”</blockquote>
+          <figcaption className="mt-8 eyebrow">{activeQuote.name} — {activeQuote.role}</figcaption>
         </figure>
         <div className="mt-10 flex gap-3">
           {testimonials.map((t, i) => <Button key={t.name} size="icon" variant="ghost" aria-label={`Show testimonial ${i + 1}`} aria-pressed={quote === i} onClick={() => setQuote(i)} className={`rounded-full border border-primary-foreground/40 hover:bg-primary-foreground/10 ${quote === i ? "bg-primary-foreground text-primary hover:bg-primary-foreground" : ""}`}>{i + 1}</Button>)}
