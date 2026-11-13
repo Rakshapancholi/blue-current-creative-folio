@@ -52,7 +52,7 @@ const team = [
   { image: teamSeo, role: "Search & SEO" },
   { image: teamPaid, role: "Paid Media" },
 ];
-type Member = { image: string; role: string; label?: string };
+type Member = { image: string; role: string; label?: string | undefined };
 const m = (i: number, label?: string): Member => ({ ...team[i]!, label });
 const teamGrid: (Member | "logo" | null)[] = [
   null, m(0, "pill-left"), m(1), null,
