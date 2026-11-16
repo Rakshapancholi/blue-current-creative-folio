@@ -21,12 +21,11 @@ import awardGlobal100 from "@/assets/brand/award-global-100.png.asset.json";
 import awardCLW from "@/assets/brand/award-corporate-livewire.png.asset.json";
 import awardMA from "@/assets/brand/award-ma-today.png.asset.json";
 import awardSME from "@/assets/brand/award-sme500.png.asset.json";
-import workNanografix from "@/assets/work/nanografix.png.asset.json";
 import workAllison from "@/assets/work/allison-homes.png.asset.json";
-import workFocus from "@/assets/work/focus-wave.png.asset.json";
-import workHarlow from "@/assets/work/harlow-ac.png.asset.json";
-import workRavetch from "@/assets/work/ravetch.png.asset.json";
-import workZebra from "@/assets/work/zebra.png.asset.json";
+import mockTablet from "@/assets/work/mock-high-contrast-purple-tablet-mockup.png.asset.json";
+import mockLaptop from "@/assets/work/mock-minimal-laptop-studio-mockup.png.asset.json";
+import mockProduct from "@/assets/work/mock-minimalist-product-details-screen.png.asset.json";
+import mockStrutt from "@/assets/work/mock-strutt-studio-oker.jpeg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
@@ -67,14 +66,13 @@ const services = [
   { title: "Branding & Design", line: "Give your brand a recognisable visual identity.", image: workAllison.url, alt: "Brand identity work", items: ["Logo design", "Brand identity", "Graphic design", "Social media graphics", "Email design"], cta: "Explore design services" },
   { title: "Content Creation", line: "Give your brand something worth looking at.", image: serviceContent, alt: "Photographer on a product photoshoot set", items: ["Photography", "Videography", "Copywriting", "Blog content"], cta: "Explore content creation" },
 ];
-const projects = [
-  { name: "Harlow Athletic Club", service: "Website design & development", image: workHarlow.url, description: "A new website for a community athletics club, built around members, events and training." },
-  { name: "Ravetch", service: "Website design & development", image: workRavetch.url, description: "A clear, corporate web presence for a clean and sustainable energy business." },
-  { name: "Nanografix", service: "Service to be confirmed", image: workNanografix.url, description: "Advanced security solutions brand." },
-  { name: "Allison Homes", service: "Service to be confirmed", image: workAllison.url, description: "Housebuilder brand across the UK." },
-  { name: "Focus Wave Clinic", service: "Service to be confirmed", image: workFocus.url, description: "Healthcare clinic brand." },
-  { name: "Zebra", service: "Service to be confirmed", image: workZebra.url, description: "Housing for international students." },
+const showcase = [
+  { name: "Andere Lab", image: mockLaptop.url, cls: "md:col-span-7 aspect-[16/11]" },
+  { name: "Strutt Studio", image: mockStrutt.url, cls: "md:col-span-5 aspect-[4/5] md:mt-24" },
+  { name: "Nocturne Tablet", image: mockTablet.url, cls: "md:col-span-5 aspect-[4/5]" },
+  { name: "Strutt Product Details", image: mockProduct.url, cls: "md:col-span-7 aspect-[16/11] md:-mt-24 md:self-end" },
 ];
+const socials = ["Instagram", "TikTok", "LinkedIn", "Facebook", "X"];
 const steps = [
   { title: "Let's understand your goals", text: "We start with a conversation about your business, challenges and what you want to achieve." },
   { title: "Build the right approach", text: "We put together a proposal outlining the recommended services, scope and fees." },
@@ -136,11 +134,11 @@ function Index() {
         {menuOpen && <nav className="mobile-nav absolute z-20 flex flex-col bg-primary" aria-label="Mobile navigation">{[...nav, ["Contact", "contact"] as [string, string]].map(([label, id]) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}<ArrowUpRight /></a>)}</nav>}
         <div className="hero-content relative z-10">
           <div className="eyebrow flex items-center gap-2"><span className="status-dot bg-primary-foreground" /> DIGITAL MARKETING · CREATIVE · STRATEGY</div>
-          <h1>Make your brand <em>impossible to overlook.</em></h1>
+          <h1>MAKE YOUR BRAND IMPOSSIBLE TO OVERLOOK.</h1>
           <p className="hero-statement">From scroll-stopping social content to smarter digital marketing, we bring creative thinking and practical expertise together to help businesses grow online.</p>
           <div className="mt-9 flex flex-wrap items-center gap-6">
             <Button asChild variant="secondary" className="h-12 rounded-none px-7"><a href="#services">EXPLORE OUR SERVICES <ArrowDown /></a></Button>
-            <a href="#contact" onClick={bookCall} className="hero-work-link mt-0 inline-flex items-center gap-4">BOOK A DISCOVERY CALL <span className="flex size-10 items-center justify-center rounded-full border border-primary-foreground/50"><ArrowUpRight className="size-4" /></span></a>
+            <Button asChild variant="outline" className="h-12 rounded-none border-primary-foreground/60 bg-transparent px-7 text-primary-foreground hover:bg-primary-foreground hover:text-primary"><a href="#contact" onClick={bookCall}>BOOK A DISCOVERY CALL <ArrowUpRight /></a></Button>
           </div>
         </div>
         <div className="hero-bottom relative z-10 flex items-end justify-between gap-6 border-t border-primary-foreground/25">
@@ -155,21 +153,34 @@ function Index() {
           <div><div className="eyebrow section-label text-muted-foreground">GOOD COMPANY, GOOD WORK</div><h2 id="credentials-title">Our work has made <em>its way around.</em></h2></div>
           <p className="text-muted-foreground">We've partnered with businesses across different industries, helping them build their digital presence through creative and strategic marketing.</p>
         </div>
-        <div className="float-card mt-14 px-6 py-8"><img src={clientLogos.url} alt="Clients: Allison Homes, Maverick TV, Wordfence, We Are Padel, Atlantic Productions, Amazon, European Commission, On the Beach, Mason London" className="mx-auto w-full max-w-6xl" loading="lazy" /></div>
-        <div className="mt-8 grid grid-cols-2 gap-5 lg:grid-cols-4">
-          {awards.map((a, i) => <figure key={a.title} className={`float-card award-card flex flex-col items-center p-6 text-center ${i % 2 ? "lg:translate-y-8" : ""}`}>
-            <div className="flex h-32 items-center justify-center"><img src={a.src} alt={`${a.title} winner badge`} className="max-h-full max-w-full object-contain" loading="lazy" /></div>
-            <figcaption className="mt-4 text-sm font-medium">{a.title}</figcaption>
+      </section>
+      <div className="ticker overflow-hidden pb-24" aria-label="Clients">
+        <div className="ticker-track items-center">
+          {[0, 1].map(k => <img key={k} src={clientLogos.url} alt={k === 0 ? "Clients: Allison Homes, Maverick TV, Wordfence, We Are Padel, Atlantic Productions, Amazon, European Commission, On the Beach, Mason London" : ""} aria-hidden={k > 0} className="h-14 w-auto max-w-none md:h-20" loading="lazy" />)}
+        </div>
+      </div>
+
+      {/* AWARDS */}
+      <section className="section-shell border-t border-border py-28" aria-labelledby="awards-title">
+        <div className="grid gap-8 md:grid-cols-[3fr_2fr] md:items-end">
+          <div><div className="eyebrow section-label text-muted-foreground">RECOGNITION</div><h2 id="awards-title">Award-winning, <em>internationally.</em></h2></div>
+          <p className="text-muted-foreground">Independent recognition for the work, the thinking and the people behind it.</p>
+        </div>
+        <div className="mt-14 grid grid-cols-2 border-l border-t border-border lg:grid-cols-4">
+          {awards.map((a, i) => <figure key={a.title} className="award-cell group relative flex flex-col border-b border-r border-border p-8">
+            <span className="eyebrow text-muted-foreground">0{i + 1}</span>
+            <div className="flex h-40 items-center justify-center"><img src={a.src} alt={`${a.title} winner badge`} className="max-h-full max-w-full object-contain transition duration-500 group-hover:scale-105" loading="lazy" /></div>
+            <figcaption className="mt-6"><p className="font-medium leading-tight">{a.title}</p><p className="mt-1 text-sm text-muted-foreground">{a.text}</p></figcaption>
           </figure>)}
         </div>
       </section>
 
-      {/* FEATURED — deep blue ticker */}
-      <section className="deep overflow-hidden py-16" aria-labelledby="featured-title">
-        <div className="section-shell mb-10 flex items-center justify-between"><h2 id="featured-title" className="text-3xl md:text-4xl">Featured <em>in</em></h2><span className="eyebrow opacity-70">AS SEEN IN THE PRESS</span></div>
-        <div className="ticker"><div className="ticker-track">
-          {[0, 1, 2, 3].map(k => <img key={k} src={featuredMedia.url} alt={k === 0 ? "Featured in Forbes, Yahoo Finance, Content Marketing Institute, The Drum, GoDaddy and HubSpot" : ""} aria-hidden={k > 0} className="h-14 w-auto max-w-none md:h-16" loading="lazy" />)}
-        </div></div>
+      {/* FEATURED — deep blue, static */}
+      <section className="deep section-shell py-20" aria-labelledby="featured-title">
+        <div className="grid items-center gap-10 md:grid-cols-[1fr_3fr]">
+          <div><div className="eyebrow mb-3 text-muted-foreground">AS SEEN IN THE PRESS</div><h2 id="featured-title" className="text-3xl md:text-4xl">Featured <em>in</em></h2></div>
+          <img src={featuredMedia.url} alt="Featured in Forbes, Yahoo Finance, Content Marketing Institute, The Drum, GoDaddy and HubSpot" className="w-full" loading="lazy" />
+        </div>
       </section>
 
       {/* 03 WHO WE ARE — floating card over team photo */}
@@ -212,16 +223,13 @@ function Index() {
         </div>
       </section>
 
-      {/* 05 SELECTED WORK — asymmetric editorial grid */}
-      <section id="work" className="section-shell py-28">
-        <div className="section-top grid gap-6 md:grid-cols-[1fr_2fr] md:items-end">
-          <div className="eyebrow text-muted-foreground">A CLOSER LOOK</div>
-          <h2>Good work <em>speaks for itself.</em></h2>
-        </div>
-        <div className="grid gap-x-6 gap-y-12 md:grid-cols-3">
-          {projects.map((p, i) => <a key={p.name} href="#contact" className={`group block ${i === 1 ? "md:col-span-2" : ""}`}>
-            <div className={`project-frame ${i === 1 ? "aspect-[16/10]" : i === 0 ? "aspect-[4/5] md:aspect-[4/5]" : "aspect-[4/3]"}`}><img src={p.image} alt={`${p.name} project`} loading="lazy" className="h-full w-full object-cover" /></div>
-            <div className="mt-4 flex items-start justify-between gap-4"><div><h3 className="font-medium">{p.name}</h3><p className="text-sm text-muted-foreground">{p.service}</p></div><ArrowUpRight className="size-5 transition group-hover:-translate-y-1 group-hover:translate-x-1" /></div>
+      {/* 05 SELECTED WORK — mockups over deep blue */}
+      <section id="work" className="deep section-shell py-28">
+        <div className="mb-16 flex items-end justify-between gap-6"><h2 className="text-5xl md:text-7xl">Good work <em>speaks for itself.</em></h2><span className="eyebrow hidden text-muted-foreground md:block">SELECTED WORK</span></div>
+        <div className="grid gap-6 md:grid-cols-12">
+          {showcase.map(p => <a key={p.name} href="#contact" className={`group relative block overflow-hidden ${p.cls}`}>
+            <img src={p.image} alt={`${p.name} project`} loading="lazy" className="work-img h-full w-full object-cover" />
+            <span className="overlay-tag absolute bottom-0 left-0 flex items-center gap-3">{p.name}<ArrowUpRight className="size-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span>
           </a>)}
         </div>
       </section>
@@ -293,14 +301,18 @@ function Index() {
         </div>
       </section>
 
-      <footer className="deep section-shell py-16">
-        <div className="grid gap-10 md:grid-cols-4">
-          <div><a href="#home" aria-label="Nautilus Marketing home"><img src={logo.url} alt="Nautilus Marketing" className="nav-logo logo-light" width={181} height={48} /></a><p className="mt-5 text-sm text-muted-foreground">Creative thinking. Digital know-how. No ordinary marketing.</p></div>
-          <nav aria-label="Footer navigation" className="flex flex-col gap-2 text-sm"><span className="eyebrow text-muted-foreground">NAVIGATE</span>{[...nav, ["Contact", "contact"] as [string, string]].map(([l, id]) => <a key={id} href={`#${id}`}>{l}</a>)}</nav>
-          <div className="flex flex-col gap-2 text-sm"><span className="eyebrow text-muted-foreground">SERVICES</span>{services.map(s => <a key={s.title} href="#services">{s.title}</a>)}</div>
-          <div className="flex flex-col gap-2 text-sm"><span className="eyebrow text-muted-foreground">CONTACT</span><a href="mailto:info@nautilusmarketing.co.uk">info@nautilusmarketing.co.uk</a><a href="tel:+442045139344">020 4513 9344</a><span className="text-muted-foreground">Vintage House, 36–37 Albert Embankment, London SE1 7TL</span></div>
+      <footer className="deep section-shell pt-24 pb-8">
+        <h2 className="footer-title max-w-4xl">Build your new future <em>with us.</em></h2>
+        <p className="mt-6 max-w-xl text-muted-foreground">Creative thinking. Digital know-how. No ordinary marketing. A London-based digital marketing agency helping businesses grow online since 2017.</p>
+        <div className="mt-16">
+          <div className="footer-row"><span className="eyebrow text-muted-foreground">SITEMAP</span><nav aria-label="Footer navigation" className="flex flex-wrap gap-x-8 gap-y-2">{[...nav, ["Contact", "contact"] as [string, string]].map(([l, id]) => <a key={id} href={`#${id}`}>{l}</a>)}</nav></div>
+          <div className="footer-row"><span className="eyebrow text-muted-foreground">VISIT</span><span>Vintage House, 36–37 Albert Embankment, London SE1 7TL, United Kingdom</span></div>
+          <div className="footer-row"><span className="eyebrow text-muted-foreground">WORK WITH US</span><div className="flex flex-wrap gap-x-8 gap-y-2"><a href="mailto:info@nautilusmarketing.co.uk">info@nautilusmarketing.co.uk</a><a href="tel:+442045139344">020 4513 9344</a></div></div>
         </div>
-        <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6"><span className="eyebrow text-muted-foreground">© 2026 NAUTILUS MARKETING — CREATIVE THINKING. DIGITAL KNOW-HOW. NO ORDINARY MARKETING.</span><Button asChild size="icon" variant="ghost" className="rounded-full border border-border"><a href="#home" aria-label="Back to top"><ArrowUp /></a></Button></div>
+        <div className="mt-16 flex flex-wrap items-center justify-between gap-6 text-sm">
+          <div className="flex flex-wrap gap-6">{socials.map(x => <a key={x} href="#home">{x}</a>)}</div>
+          <span className="text-muted-foreground">© 2026 Nautilus Marketing. All rights reserved.</span>
+        </div>
       </footer>
     </main>
   );
