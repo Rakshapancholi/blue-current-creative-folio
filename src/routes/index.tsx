@@ -83,7 +83,6 @@ const showcase = [
   { name: "Nocturne Tablet", image: mockTablet.url, cls: "md:col-span-5 aspect-[4/5]" },
   { name: "Strutt Product Details", image: mockProduct.url, cls: "md:col-span-7 aspect-[16/11] md:-mt-24 md:self-end" },
 ];
-const socials = ["Instagram", "TikTok", "LinkedIn", "Facebook", "X"];
 const steps = [
   { title: "Let's understand your goals", text: "We start with a conversation about your business, challenges and what you want to achieve." },
   { title: "Build the right approach", text: "We put together a proposal outlining the recommended services, scope and fees." },
@@ -314,18 +313,6 @@ function Index() {
         </div>
       </section>
 
-      <footer className="deep section-shell pt-24 pb-8">
-        <h2 className="footer-title max-w-4xl">Build your new future <em>with us.</em></h2>
-        <p className="mt-6 max-w-xl text-muted-foreground">Creative thinking. Digital know-how. No ordinary marketing. A London-based digital marketing agency helping businesses grow online since 2017.</p>
-        <div className="mt-16">
-          <div className="footer-row"><span className="eyebrow text-muted-foreground">VISIT</span><span>Vintage House, 36–37 Albert Embankment, London SE1 7TL, United Kingdom</span></div>
-          <div className="footer-row"><span className="eyebrow text-muted-foreground">WORK WITH US</span><div className="flex flex-wrap gap-x-8 gap-y-2"><a href="mailto:info@nautilusmarketing.co.uk">info@nautilusmarketing.co.uk</a><a href="tel:+442045139344">020 4513 9344</a></div></div>
-        </div>
-        <div className="mt-16 flex flex-wrap items-center justify-between gap-6 text-sm">
-          <div className="flex flex-wrap gap-6">{socials.map(x => <a key={x} href="#home">{x}</a>)}</div>
-          <span className="text-muted-foreground">© 2026 Nautilus Marketing. All rights reserved.</span>
-        </div>
-      </footer>
     </main>
   );
 }
