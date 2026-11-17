@@ -1,3 +1,12 @@
+import cl0 from "@/assets/brand/clients/allison-homes.png.asset.json";
+import cl1 from "@/assets/brand/clients/maverick-tv.png.asset.json";
+import cl2 from "@/assets/brand/clients/wordfence.png.asset.json";
+import cl3 from "@/assets/brand/clients/we-are-padel.png.asset.json";
+import cl4 from "@/assets/brand/clients/atlantic-productions.png.asset.json";
+import cl5 from "@/assets/brand/clients/amazon.png.asset.json";
+import cl6 from "@/assets/brand/clients/european-commission.png.asset.json";
+import cl7 from "@/assets/brand/clients/on-the-beach.png.asset.json";
+import cl8 from "@/assets/brand/clients/mason-london.png.asset.json";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowUpRight, ArrowDown, ArrowUp, Menu, X, Check, Plus, Minus } from "lucide-react";
@@ -38,6 +47,8 @@ export const Route = createFileRoute("/")({
   ] }),
   component: Index,
 });
+
+const clientList = [{ src: cl0.url, name: "Allison Homes" },{ src: cl1.url, name: "Maverick TV" },{ src: cl2.url, name: "Wordfence" },{ src: cl3.url, name: "We Are Padel" },{ src: cl4.url, name: "Atlantic Productions" },{ src: cl5.url, name: "Amazon" },{ src: cl6.url, name: "European Commission" },{ src: cl7.url, name: "On the Beach" },{ src: cl8.url, name: "Mason London" }];
 
 const awards = [
   { src: awardGlobal100.url, title: "Global 100", text: "Digital Marketing Agency of the Year" },
@@ -156,7 +167,9 @@ function Index() {
       </section>
       <div className="ticker overflow-hidden pb-24" aria-label="Clients">
         <div className="ticker-track items-center">
-          {[0, 1].map(k => <img key={k} src={clientLogos.url} alt={k === 0 ? "Clients: Allison Homes, Maverick TV, Wordfence, We Are Padel, Atlantic Productions, Amazon, European Commission, On the Beach, Mason London" : ""} aria-hidden={k > 0} className="h-14 w-auto max-w-none md:h-20" loading="lazy" />)}
+          {[0, 1].map(k => <div key={k} className="flex shrink-0 items-center gap-16 pr-16 md:gap-24 md:pr-24" aria-hidden={k > 0}>
+            {clientList.map(c => <img key={c.name} src={c.src} alt={k === 0 ? c.name : ""} className="h-12 w-auto max-w-none object-contain md:h-16" loading="lazy" />)}
+          </div>)}
         </div>
       </div>
 
@@ -305,7 +318,6 @@ function Index() {
         <h2 className="footer-title max-w-4xl">Build your new future <em>with us.</em></h2>
         <p className="mt-6 max-w-xl text-muted-foreground">Creative thinking. Digital know-how. No ordinary marketing. A London-based digital marketing agency helping businesses grow online since 2017.</p>
         <div className="mt-16">
-          <div className="footer-row"><span className="eyebrow text-muted-foreground">SITEMAP</span><nav aria-label="Footer navigation" className="flex flex-wrap gap-x-8 gap-y-2">{[...nav, ["Contact", "contact"] as [string, string]].map(([l, id]) => <a key={id} href={`#${id}`}>{l}</a>)}</nav></div>
           <div className="footer-row"><span className="eyebrow text-muted-foreground">VISIT</span><span>Vintage House, 36–37 Albert Embankment, London SE1 7TL, United Kingdom</span></div>
           <div className="footer-row"><span className="eyebrow text-muted-foreground">WORK WITH US</span><div className="flex flex-wrap gap-x-8 gap-y-2"><a href="mailto:info@nautilusmarketing.co.uk">info@nautilusmarketing.co.uk</a><a href="tel:+442045139344">020 4513 9344</a></div></div>
         </div>
