@@ -20,6 +20,7 @@
 
 @theme inline {
   --font-sans: "Satoshi", sans-serif;
+  --font-display: "Thunder", "Satoshi", sans-serif;
   --font-editorial: "IBM Plex Serif", Georgia, serif;
   --color-surface: var(--surface);
   --color-surface-foreground: var(--surface-foreground);
@@ -68,7 +69,7 @@
 :root {
   --radius: 0.625rem;
   /* Brand blue #00417C drives the whole page */
-  --background: oklch(0.985 0.003 250);
+  --background: oklch(1 0 0);
   --foreground: oklch(0.2 0.04 255);
   --surface: oklch(0.97 0.004 250);
   --surface-foreground: oklch(0.2 0.04 255);
@@ -76,9 +77,9 @@
   --card-foreground: oklch(0.2 0.04 255);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.2 0.04 255);
-  --primary: oklch(0.366 0.115 253);
+  --primary: oklch(0.46 0.22 264);
   --primary-foreground: oklch(0.985 0.004 250);
-  --secondary: oklch(0.955 0.006 250);
+  --secondary: oklch(0.955 0.006 240);
   --secondary-foreground: oklch(0.2 0.04 255);
   --muted: oklch(0.955 0.006 250);
   --muted-foreground: oklch(0.5 0.02 255);
@@ -88,7 +89,8 @@
   --destructive-foreground: oklch(0.984 0.003 247.858);
   --border: oklch(0.2 0.04 255 / 12%);
   --input: oklch(0.2 0.04 255 / 20%);
-  --ring: oklch(0.366 0.115 253);
+  --ring: oklch(0.46 0.22 264);
+  --electric: oklch(0.45 0.31 264);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -279,3 +281,25 @@ a:hover .project-frame img { transform: scale(1.03); }
 a:hover .work-img { transform: scale(1.04); }
 .overlay-tag { background: var(--card); color: var(--card-foreground); padding: 12px 18px; font-size: 14px; font-weight: 500; }
 @media (max-width: 767px) { .hero h1 { font-size: 44px; } }
+
+/* Final reference system: Thunder display + Satoshi body, generous whitespace */
+@font-face { font-family: "Thunder"; src: url("/fonts/Thunder-MediumLC.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Thunder"; src: url("/fonts/Thunder-SemiBoldLC.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Thunder"; src: url("/fonts/Thunder-BoldLC.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+.thunder { font-family: var(--font-display); font-weight: 500; letter-spacing: 0; line-height: 1; }
+.display-h { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: clamp(56px, 8vw, 120px); line-height: .9; letter-spacing: 0; }
+.hero { min-height: 100vh; }
+.hero h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(64px, 9vw, 150px); line-height: .9; letter-spacing: 0; margin: 0 0 32px; }
+.hero-content { padding: 120px 48px 80px; max-width: 760px; }
+.hero-statement { font-size: 18px; max-width: 520px; opacity: .9; }
+.hero-tint { background: linear-gradient(90deg, var(--primary) 35%, transparent 70%); mix-blend-mode: normal; }
+.hero-btn { height: 40px; padding: 0 18px; font-size: 11px; letter-spacing: .02em; }
+.site-header nav { font-size: 13px; }
+.section-shell { padding-left: 64px; padding-right: 64px; }
+.electric { background: var(--electric); color: var(--primary-foreground); --border: oklch(1 0 0 / 25%); --muted-foreground: oklch(0.9 0.03 260); }
+.electric .contact-input, .electric select { color: inherit; }
+.footer-row { display: grid; grid-template-columns: 1fr 1fr; padding: 28px 0; border-top: 1px solid var(--border); }
+.footer-row:last-child { border-bottom: 1px solid var(--border); }
+em { font-family: inherit; font-style: normal; font-weight: inherit; }
+@media (max-width: 767px) { .section-shell { padding-left: 24px; padding-right: 24px; } .hero-content { padding: 80px 24px 60px; } .hero h1 { font-size: 64px; } .hero-image { opacity: .5; } }
+.hero-image { object-position: 35% center; }

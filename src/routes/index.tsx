@@ -9,7 +9,7 @@ import cl7 from "@/assets/brand/clients/on-the-beach.png.asset.json";
 import cl8 from "@/assets/brand/clients/mason-london.png.asset.json";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowUpRight, ArrowDown, ArrowUp, Menu, X, Check, Plus, Minus } from "lucide-react";
+import { ArrowUpRight, Menu, X, Check, Plus, Minus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import hero from "@/assets/nautilius-hero.jpg";
 import digital from "@/assets/digital.jpg";
@@ -127,89 +127,82 @@ function Index() {
     setErrors(next);
     if (Object.keys(next).length === 0) setSent(true);
   };
+  const H = ({ id, children, light }: { id?: string; children: React.ReactNode; light?: boolean }) => <h2 id={id} className={`display-h ${light ? "" : "text-primary"}`}>{children}</h2>;
   return (
     <main>
-      {/* 01 HERO — layout unchanged, copy from the brief */}
       <section className="hero relative overflow-hidden bg-primary text-primary-foreground" id="home">
-        <img className="hero-image absolute inset-0 h-full w-full object-cover" src={hero} alt="Sculptural silver nautilus spiral on a deep blue background" width={1920} height={1024} />
+        <img className="hero-image absolute inset-y-0 right-0 h-full w-full object-cover md:w-[62%]" src={hero} alt="Sculptural silver nautilus spiral" width={1920} height={1024} />
         <div className="hero-tint absolute inset-0" aria-hidden />
-        <header className="site-header relative z-10 flex items-center justify-between border-b border-primary-foreground/25">
+        <header className="site-header relative z-10 flex items-center justify-between border-b border-primary-foreground/20">
           <a href="#home" aria-label="Nautilus Marketing home"><img src={logo.url} alt="Nautilus Marketing" className="nav-logo logo-light" width={181} height={48} /></a>
-          <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation">
-            {nav.map(([l, id]) => <a key={id} href={`#${id}`}>{l}</a>)}
-          </nav>
+          <nav className="hidden items-center gap-10 md:flex" aria-label="Main navigation">{nav.map(([l, id]) => <a key={id} href={`#${id}`}>{l}</a>)}</nav>
           <Button asChild variant="secondary" className="contact-button hidden rounded-none md:inline-flex"><a href="#contact" onClick={bookCall}>BOOK A DISCOVERY CALL <ArrowUpRight /></a></Button>
           <Button variant="ghost" size="icon" className="md:hidden hover:bg-primary-foreground/10" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</Button>
         </header>
         {menuOpen && <nav className="mobile-nav absolute z-20 flex flex-col bg-primary" aria-label="Mobile navigation">{[...nav, ["Contact", "contact"] as [string, string]].map(([label, id]) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}<ArrowUpRight /></a>)}</nav>}
         <div className="hero-content relative z-10">
-          <div className="eyebrow flex items-center gap-2"><span className="status-dot bg-primary-foreground" /> DIGITAL MARKETING · CREATIVE · STRATEGY</div>
-          <h1>MAKE YOUR BRAND IMPOSSIBLE TO OVERLOOK.</h1>
+          <h1>Make your brand<br />impossible to<br />overlook.</h1>
           <p className="hero-statement">From scroll-stopping social content to smarter digital marketing, we bring creative thinking and practical expertise together to help businesses grow online.</p>
-          <div className="mt-9 flex flex-wrap items-center gap-6">
-            <Button asChild variant="secondary" className="h-12 rounded-none px-7"><a href="#services">EXPLORE OUR SERVICES <ArrowDown /></a></Button>
-            <Button asChild variant="outline" className="h-12 rounded-none border-primary-foreground/60 bg-transparent px-7 text-primary-foreground hover:bg-primary-foreground hover:text-primary"><a href="#contact" onClick={bookCall}>BOOK A DISCOVERY CALL <ArrowUpRight /></a></Button>
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <Button asChild variant="secondary" className="hero-btn rounded-none"><a href="#work">VIEW OUR WORK <ArrowUpRight /></a></Button>
+            <Button asChild variant="outline" className="hero-btn rounded-none border-primary-foreground/70 bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary"><a href="#contact" onClick={bookCall}>BOOK A CALL <ArrowUpRight /></a></Button>
           </div>
-        </div>
-        <div className="hero-bottom relative z-10 flex items-end justify-between gap-6 border-t border-primary-foreground/25">
-          <p>Social media management, SEO, paid advertising, web design and content creation — all under one roof.</p>
-          <span className="eyebrow">SCROLL TO DISCOVER ↓</span>
+          <div className="mt-20 flex flex-wrap items-center gap-12" aria-label="Clients">
+            {[clientList[6]!, clientList[5]!, clientList[4]!].map(c => <img key={c.name} src={c.src} alt={c.name} className="logo-light h-10 w-auto max-w-none object-contain md:h-12" />)}
+          </div>
         </div>
       </section>
 
-      {/* 02 GOOD COMPANY — white */}
-      <section className="section-shell py-28" aria-labelledby="credentials-title">
-        <div className="grid gap-8 md:grid-cols-[3fr_2fr] md:items-end">
-          <div><div className="eyebrow section-label text-muted-foreground">GOOD COMPANY, GOOD WORK</div><h2 id="credentials-title">Our work has made <em>its way around.</em></h2></div>
-          <p className="text-muted-foreground">We've partnered with businesses across different industries, helping them build their digital presence through creative and strategic marketing.</p>
+      <section id="services" className="section-shell bg-secondary py-36">
+        <H>Our services</H>
+        <div className="relative mt-16 border-t border-border" onMouseLeave={() => setActiveService(null)}>
+          {services.map((s, i) => <a key={s.title} href="#contact" onMouseEnter={() => setActiveService(i)} onFocus={() => setActiveService(i)} className="service-line group grid grid-cols-[40px_1fr_auto] items-center gap-4 border-b border-border py-8 md:grid-cols-[70px_1fr_1fr_auto]">
+            <span className="text-[10px] text-muted-foreground">0{i + 1}</span>
+            <span className="thunder text-4xl transition-transform duration-500 group-hover:translate-x-3 md:text-5xl">{s.title}</span>
+            <span className="hidden text-sm text-muted-foreground md:block">{s.line}</span>
+            <span className="flex size-10 items-center justify-center rounded-full border border-border transition group-hover:bg-primary group-hover:text-primary-foreground"><ArrowUpRight className="size-4" /></span>
+          </a>)}
+          {services.map((s, i) => <img key={s.title} src={s.image} alt="" aria-hidden className={`service-reveal ${activeService === i ? "is-on" : ""}`} style={{ top: `${i * 16.6 - 6}%` }} />)}
         </div>
       </section>
-      <div className="ticker overflow-hidden pb-24" aria-label="Clients">
+
+      <section className="section-shell py-36" aria-labelledby="clients-title">
+        <div className="grid gap-10 md:grid-cols-2 md:items-end"><H id="clients-title">Good company,<br />good work</H><p className="max-w-md text-muted-foreground">We've partnered with businesses across different industries, helping them build their digital presence through creative and strategic marketing.</p></div>
+      </section>
+      <div className="ticker overflow-hidden pb-36" aria-label="Clients">
         <div className="ticker-track items-center">
-          {[0, 1].map(k => <div key={k} className="flex shrink-0 items-center gap-16 pr-16 md:gap-24 md:pr-24" aria-hidden={k > 0}>
+          {[0, 1].map(k => <div key={k} className="flex shrink-0 items-center gap-20 pr-20 md:gap-28 md:pr-28" aria-hidden={k > 0}>
             {clientList.map(c => <img key={c.name} src={c.src} alt={k === 0 ? c.name : ""} className="h-12 w-auto max-w-none object-contain md:h-16" loading="lazy" />)}
           </div>)}
         </div>
       </div>
 
-      {/* AWARDS */}
-      <section className="section-shell border-t border-border py-28" aria-labelledby="awards-title">
-        <div className="grid gap-8 md:grid-cols-[3fr_2fr] md:items-end">
-          <div><div className="eyebrow section-label text-muted-foreground">RECOGNITION</div><h2 id="awards-title">Award-winning, <em>internationally.</em></h2></div>
-          <p className="text-muted-foreground">Independent recognition for the work, the thinking and the people behind it.</p>
-        </div>
-        <div className="mt-14 grid grid-cols-2 border-l border-t border-border lg:grid-cols-4">
-          {awards.map((a, i) => <figure key={a.title} className="award-cell group relative flex flex-col border-b border-r border-border p-8">
-            <span className="eyebrow text-muted-foreground">0{i + 1}</span>
+      <section className="section-shell border-t border-border py-36" aria-labelledby="awards-title">
+        <div className="grid gap-10 md:grid-cols-2 md:items-end"><H id="awards-title">Award-winning,<br />internationally</H><p className="max-w-md text-muted-foreground">Independent recognition for the work, the thinking and the people behind it.</p></div>
+        <div className="mt-20 grid grid-cols-2 border-l border-t border-border lg:grid-cols-4">
+          {awards.map(a => <figure key={a.title} className="award-cell group flex flex-col border-b border-r border-border p-10">
             <div className="flex h-40 items-center justify-center"><img src={a.src} alt={`${a.title} winner badge`} className="max-h-full max-w-full object-contain transition duration-500 group-hover:scale-105" loading="lazy" /></div>
-            <figcaption className="mt-6"><p className="font-medium leading-tight">{a.title}</p><p className="mt-1 text-sm text-muted-foreground">{a.text}</p></figcaption>
+            <figcaption className="mt-8"><p className="font-medium leading-tight">{a.title}</p><p className="mt-1 text-sm text-muted-foreground">{a.text}</p></figcaption>
           </figure>)}
         </div>
       </section>
 
-      {/* FEATURED — deep blue, static */}
-      <section className="deep section-shell py-20" aria-labelledby="featured-title">
-        <div className="grid items-center gap-10 md:grid-cols-[1fr_3fr]">
-          <div><div className="eyebrow mb-3 text-muted-foreground">AS SEEN IN THE PRESS</div><h2 id="featured-title" className="text-3xl md:text-4xl">Featured <em>in</em></h2></div>
-          <img src={featuredMedia.url} alt="Featured in Forbes, Yahoo Finance, Content Marketing Institute, The Drum, GoDaddy and HubSpot" className="w-full" loading="lazy" />
-        </div>
+      <section className="deep section-shell py-24" aria-labelledby="featured-title">
+        <div className="grid items-center gap-12 md:grid-cols-[1fr_3fr]"><H id="featured-title" light>Featured in</H>
+          <img src={featuredMedia.url} alt="Featured in Forbes, Yahoo Finance, Content Marketing Institute, The Drum, GoDaddy and HubSpot" className="w-full" loading="lazy" /></div>
       </section>
 
-      {/* 03 WHO WE ARE — floating card over team photo */}
-      <section id="about" className="section-shell py-28">
-        <div className="relative">
-          <img src={teamPhoto.url} alt="Two Nautilus team members chatting in front of the Nautilus 'Need a Nerd's Advice?' stand" width={1280} height={1920} loading="lazy" className="h-[560px] w-full rounded-[28px] object-cover object-[center_40%] md:h-[680px] md:w-[62%]" />
-          <div className="float-card relative -mt-24 mx-4 p-8 md:absolute md:right-0 md:top-1/2 md:mx-0 md:mt-0 md:w-[46%] md:-translate-y-1/2 md:p-12">
-            <div className="eyebrow section-label text-muted-foreground">MEET THE NAUTI NERDS</div>
-            <h2>A different kind of agency. <em>A different way of thinking.</em></h2>
-            <p className="mt-6 text-muted-foreground">A London-based digital marketing agency, founded in 2017, bringing together creative minds, technical thinkers and marketing specialists.</p>
-            <p className="mt-4">No jargon. No one-size-fits-all thinking. Just a team that cares about the work.</p>
-            <span className="float-pill absolute -top-5 left-8 hidden md:inline-flex">Since 2017 · London</span>
+      <section id="about" className="section-shell py-36">
+        <div className="grid items-center gap-16 md:grid-cols-2">
+          <img src={teamPhoto.url} alt="Two Nautilus team members chatting in front of the Nautilus stand" loading="lazy" className="h-[560px] w-full object-cover object-[center_40%] md:h-[720px]" />
+          <div>
+            <H>A different<br />kind of agency</H>
+            <p className="mt-10 max-w-lg text-xl">A London-based digital marketing agency, founded in 2017, bringing together creative minds, technical thinkers and marketing specialists.</p>
+            <p className="mt-6 max-w-lg text-muted-foreground">No jargon. No one-size-fits-all thinking. Just a team that cares about the work.</p>
           </div>
         </div>
-
-        <div id="team" className="mt-28 grid items-center gap-16 lg:grid-cols-[2fr_3fr]">
-          <div><div className="eyebrow section-label text-muted-foreground">THE TEAM</div><h2>Specialists who <em>get involved.</em></h2><p className="mt-6 text-muted-foreground">Social, search, paid, design and web — under one roof.</p></div>
+        <div id="team" className="mt-40 grid items-center gap-16 lg:grid-cols-[2fr_3fr]">
+          <div><H>Meet the<br />Nauti Nerds</H><p className="mt-8 max-w-sm text-muted-foreground">Social, search, paid, design and web — under one roof.</p></div>
           <div className="team-grid" aria-label="Nautilus team">
             {teamGrid.map((t, i) => t === null ? <span key={i} className="team-tile team-empty" aria-hidden /> :
               t === "logo" ? <span key={i} className="team-tile team-logo"><img src={logo.url} alt="" className="w-4/5" /></span> :
@@ -218,50 +211,26 @@ function Index() {
         </div>
       </section>
 
-      {/* 04 SERVICES — editorial hover-reveal rows */}
-      <section id="services" className="section-shell bg-secondary py-28">
-        <div className="grid gap-8 md:grid-cols-[3fr_2fr] md:items-end">
-          <div><div className="eyebrow section-label text-muted-foreground">WHAT WE DO</div><h2>Everything your brand needs <em>to move forward.</em></h2></div>
-          <p className="text-muted-foreground">Different businesses need different things. We bring the right creative and digital skills together.</p>
-        </div>
-        <div className="relative mt-14 border-t border-border" onMouseLeave={() => setActiveService(null)}>
-          {services.map((s, i) => <a key={s.title} href="#contact" onMouseEnter={() => setActiveService(i)} onFocus={() => setActiveService(i)} className="service-line group grid grid-cols-[48px_1fr_auto] items-center gap-4 border-b border-border py-7 md:grid-cols-[80px_1fr_1fr_auto]">
-            <span className="eyebrow text-muted-foreground">0{i + 1}</span>
-            <span className="text-3xl font-medium transition-transform duration-500 group-hover:translate-x-3 md:text-5xl">{s.title}</span>
-            <span className="hidden text-muted-foreground md:block">{s.line}</span>
-            <span className="flex size-12 items-center justify-center rounded-full border border-border transition group-hover:bg-primary group-hover:text-primary-foreground"><ArrowUpRight className="size-5" /></span>
-          </a>)}
-          {services.map((s, i) => <img key={s.title} src={s.image} alt="" aria-hidden className={`service-reveal ${activeService === i ? "is-on" : ""}`} style={{ top: `${i * 16.6 - 6}%` }} />)}
-        </div>
-      </section>
-
-      {/* 05 SELECTED WORK — mockups over deep blue */}
-      <section id="work" className="deep section-shell py-28">
-        <div className="mb-16 flex items-end justify-between gap-6"><h2 className="text-5xl md:text-7xl">Good work <em>speaks for itself.</em></h2><span className="eyebrow hidden text-muted-foreground md:block">SELECTED WORK</span></div>
-        <div className="grid gap-6 md:grid-cols-12">
+      <section id="work" className="deep section-shell py-36">
+        <div className="mb-20"><H light>Good work<br />speaks for itself</H></div>
+        <div className="grid gap-8 md:grid-cols-12">
           {showcase.map(p => <a key={p.name} href="#contact" className={`group relative block overflow-hidden ${p.cls}`}>
             <img src={p.image} alt={`${p.name} project`} loading="lazy" className="work-img h-full w-full object-cover" />
-            <span className="overlay-tag absolute bottom-0 left-0 flex items-center gap-3">{p.name}<ArrowUpRight className="size-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span>
+            <span className="overlay-tag absolute bottom-0 left-0 flex items-center gap-3">{p.name}<ArrowUpRight className="size-4" /></span>
           </a>)}
         </div>
       </section>
 
-      {/* 06 PROCESS + TESTIMONIAL */}
-      <section id="process" className="section-shell bg-secondary py-28">
-        <div className="grid gap-8 md:grid-cols-[3fr_2fr] md:items-end">
-          <div><div className="eyebrow section-label text-muted-foreground">GOOD WORK, GOOD RELATIONSHIPS</div><h2>A clear process. <em>A team in your corner.</em></h2></div>
-        </div>
-        <ol className="mt-14 grid gap-5 md:grid-cols-4">
-          {steps.map((s, i) => <li key={s.title} className={`float-card p-7 ${i % 2 ? "md:translate-y-6" : ""}`}><span className="script text-5xl text-primary">0{i + 1}</span><h3 className="mt-3 text-xl font-medium">{s.title}</h3></li>)}
+      <section id="process" className="section-shell bg-secondary py-36">
+        <H>How we work</H>
+        <ol className="mt-16 border-t border-border">
+          {steps.map((s, i) => <li key={s.title} className="grid gap-4 border-b border-border py-8 md:grid-cols-[70px_1fr_1fr]"><span className="text-[10px] text-muted-foreground">0{i + 1}</span><h3 className="thunder text-4xl md:text-5xl">{s.title}</h3><p className="text-sm text-muted-foreground">{s.text}</p></li>)}
         </ol>
-        <div className="mt-28">
-          <h2 className="text-4xl md:text-5xl">What our <em>clients say.</em></h2>
-          <div className="mt-24 grid items-end gap-6 md:grid-cols-[2fr_3fr]">
-            <figure className="testi-portrait">
-              <img src={testimonialClient} alt="Nazarii Kydyk" width={896} height={1024} loading="lazy" />
-              <figcaption className="testi-caption">Professional, friendly <em>&amp; responsive.</em></figcaption>
-            </figure>
-            <figure className="float-card relative flex min-h-[300px] flex-col justify-between p-10">
+        <div className="mt-40">
+          <H>What our<br />clients say</H>
+          <div className="mt-24 grid items-end gap-8 md:grid-cols-[2fr_3fr]">
+            <figure className="testi-portrait"><img src={testimonialClient} alt="Nazarii Kydyk" width={896} height={1024} loading="lazy" /><figcaption className="testi-caption">Professional, friendly &amp; responsive.</figcaption></figure>
+            <figure className="float-card flex min-h-[320px] flex-col justify-between p-12">
               <blockquote className="text-2xl leading-snug md:text-3xl">"Really happy with the service from Nautilus Marketing. The team was professional, friendly and responsive, and communication was great throughout."</blockquote>
               <figcaption className="mt-8"><p className="font-medium">Nazarii Kydyk</p><p className="text-sm text-muted-foreground">Verified customer review</p></figcaption>
             </figure>
@@ -269,32 +238,23 @@ function Index() {
         </div>
       </section>
 
-      {/* 07 FAQs */}
-      <section id="faqs" className="section-shell py-24">
-        <div className="grid gap-12 md:grid-cols-[2fr_3fr]">
-          <div><div className="eyebrow section-label text-muted-foreground">GOOD QUESTIONS</div><h2>Before we get started, <em>here's what you might want to know.</em></h2></div>
+      <section id="faqs" className="section-shell py-36">
+        <div className="grid gap-16 md:grid-cols-[2fr_3fr]">
+          <H>Good<br />questions</H>
           <div className="border-t border-border">
             {faqs.map((f, i) => <div key={f.q} className="border-b border-border">
-              <button className="flex w-full items-center justify-between gap-6 py-6 text-left text-xl font-medium" aria-expanded={openFaq === i} onClick={() => setOpenFaq(openFaq === i ? null : i)}>{f.q}{openFaq === i ? <Minus className="size-5 shrink-0" /> : <Plus className="size-5 shrink-0" />}</button>
-              {openFaq === i && <p className="pb-6 text-muted-foreground animate-in fade-in">{f.a}</p>}
+              <button className="flex w-full items-center justify-between gap-6 py-7 text-left text-lg font-medium" aria-expanded={openFaq === i} onClick={() => setOpenFaq(openFaq === i ? null : i)}>{f.q}{openFaq === i ? <Minus className="size-5 shrink-0" /> : <Plus className="size-5 shrink-0" />}</button>
+              {openFaq === i && <p className="pb-7 text-muted-foreground animate-in fade-in">{f.a}</p>}
             </div>)}
           </div>
         </div>
       </section>
 
-      {/* 08 FINAL CTA + CONTACT */}
-      <section id="contact" className="deep section-shell py-28">
+      <section id="contact" className="electric section-shell pt-28 pb-10">
         <div className="grid gap-14 md:grid-cols-2">
           <div>
-            <div className="eyebrow section-label flex items-center gap-2 text-muted-foreground"><span className="status-dot bg-primary-foreground" /> YOUR NEXT CHAPTER STARTS HERE</div>
-            <h2 className="text-5xl md:text-7xl">Have something <em>ambitious in mind?</em></h2>
-            <p className="mt-6 max-w-md text-muted-foreground">Whether you need a stronger social presence, better search visibility, a new website or a complete digital marketing strategy, let's talk about what you want to achieve.</p>
-            <p className="mt-4 max-w-md">Tell us a little about your business. We'll take it from there.</p>
-            <dl className="mt-10 space-y-5 text-sm">
-              <div><dt className="eyebrow text-muted-foreground">EMAIL</dt><dd className="mt-1 text-lg"><a href="mailto:info@nautilusmarketing.co.uk">info@nautilusmarketing.co.uk</a></dd></div>
-              <div><dt className="eyebrow text-muted-foreground">PHONE</dt><dd className="mt-1 text-lg"><a href="tel:+442045139344">020 4513 9344</a></dd></div>
-              <div><dt className="eyebrow text-muted-foreground">LONDON OFFICE</dt><dd className="mt-1 text-lg">Vintage House, 36–37 Albert Embankment,<br />London SE1 7TL, United Kingdom</dd></div>
-            </dl>
+            <H light>Build your new<br />future with us</H>
+            <p className="mt-8 max-w-sm text-sm">Whether you need a stronger social presence, better search visibility, a new website or a complete digital marketing strategy, let's talk about what you want to achieve.</p>
           </div>
           {sent ? <div role="status" className="flex flex-col justify-center border border-border p-10"><Check className="size-10" /><h3 className="mt-5 text-3xl">Thank you.</h3><p className="mt-3 text-muted-foreground">We've received your {enquiryType === enquiryTypes[0] ? "discovery call request" : "enquiry"}. We'll be in touch shortly.</p><Button variant="secondary" className="mt-8 w-fit rounded-none" onClick={() => setSent(false)}>Send another</Button></div> :
           <form noValidate onSubmit={submit} className="grid content-start gap-6 sm:grid-cols-2">
@@ -311,8 +271,13 @@ function Index() {
             <Button type="submit" variant="secondary" className="h-12 w-fit rounded-none px-8 sm:col-span-2">{enquiryType === enquiryTypes[0] ? "BOOK A DISCOVERY CALL" : "SEND US AN ENQUIRY"} <ArrowUpRight /></Button>
           </form>}
         </div>
+        <dl className="mt-24 text-sm">
+          <div className="footer-row"><dt>Email</dt><dd><a href="mailto:info@nautilusmarketing.co.uk">info@nautilusmarketing.co.uk</a><br /><a href="tel:+442045139344">020 4513 9344</a></dd></div>
+          <div className="footer-row"><dt>Visit</dt><dd>Vintage House, 36–37 Albert Embankment,<br />London SE1 7TL, United Kingdom</dd></div>
+          <div className="footer-row"><dt>Work with us</dt><dd><a href="#contact" onClick={bookCall}>Book a discovery call</a></dd></div>
+        </dl>
+        <img src={logo.url} alt="Nautilus Marketing" className="logo-light mx-auto mt-20 w-full max-w-3xl" loading="lazy" />
       </section>
-
     </main>
   );
 }
