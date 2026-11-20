@@ -7,7 +7,10 @@ import cl5 from "@/assets/brand/clients/amazon.png.asset.json";
 import cl6 from "@/assets/brand/clients/european-commission.png.asset.json";
 import cl7 from "@/assets/brand/clients/on-the-beach.png.asset.json";
 import cl8 from "@/assets/brand/clients/mason-london.png.asset.json";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { services as servicesData } from "@/lib/services";
+import { WordReveal } from "@/components/WordReveal";
+import amazonLogo from "@/assets/amazon-logo.png";
 import { useState } from "react";
 import { ArrowUpRight, Menu, X, Check, Plus, Minus } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -48,7 +51,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const clientList = [{ src: cl0.url, name: "Allison Homes" },{ src: cl1.url, name: "Maverick TV" },{ src: cl2.url, name: "Wordfence" },{ src: cl3.url, name: "We Are Padel" },{ src: cl4.url, name: "Atlantic Productions" },{ src: cl5.url, name: "Amazon" },{ src: cl6.url, name: "European Commission" },{ src: cl7.url, name: "On the Beach" },{ src: cl8.url, name: "Mason London" }];
+const clientList = [{ src: cl0.url, name: "Allison Homes" },{ src: cl1.url, name: "Maverick TV" },{ src: cl2.url, name: "Wordfence" },{ src: cl3.url, name: "We Are Padel" },{ src: cl4.url, name: "Atlantic Productions" },{ src: amazonLogo, name: "Amazon" },{ src: cl6.url, name: "European Commission" },{ src: cl7.url, name: "On the Beach" },{ src: cl8.url, name: "Mason London" }];
 
 const awards = [
   { src: awardGlobal100.url, title: "Global 100", text: "Digital Marketing Agency of the Year" },
@@ -69,14 +72,7 @@ const teamGrid: (Member | "logo" | null)[] = [
   m(2), "logo", m(3, "pill-right"), null,
   null, { image: teamPhoto.url, role: "The whole crew" }, null, null,
 ];
-const services = [
-  { title: "Social Media & Organic Marketing", line: "Build an online presence people want to engage with.", image: serviceSocial, alt: "Filming social video content on a phone gimbal", items: ["Social media management", "Content planning and creation", "Community management", "TikTok", "LinkedIn ghostwriting", "Email marketing"], cta: "Explore social media services" },
-  { title: "Search Engine Optimisation", line: "Help the right people discover your business.", image: serviceSeo, alt: "Marketer reviewing search performance data", items: ["SEO", "Local and international SEO", "Ecommerce SEO", "Technical and on-page SEO", "Link building and digital PR"], cta: "Explore SEO" },
-  { title: "Paid Advertising", line: "Put your business in front of the right audience.", image: servicePaid, alt: "Team reviewing ad campaign dashboards", items: ["Google Ads", "Meta Ads", "Amazon Ads", "LinkedIn Ads", "PPC management"], cta: "Explore paid advertising" },
-  { title: "Website & App Development", line: "Create digital experiences that work as well as they look.", image: digital, alt: "Website design shown on laptop and phone", items: ["Website design and development", "WordPress and Wix", "UI/UX design", "App design and development", "Website maintenance and migration"], cta: "Explore web services" },
-  { title: "Branding & Design", line: "Give your brand a recognisable visual identity.", image: workAllison.url, alt: "Brand identity work", items: ["Logo design", "Brand identity", "Graphic design", "Social media graphics", "Email design"], cta: "Explore design services" },
-  { title: "Content Creation", line: "Give your brand something worth looking at.", image: serviceContent, alt: "Photographer on a product photoshoot set", items: ["Photography", "Videography", "Copywriting", "Blog content"], cta: "Explore content creation" },
-];
+const services = servicesData;
 const showcase = [
   { name: "Andere Lab", tag: "Web Design", time: "6 weeks", image: mockLaptop.url },
   { name: "Strutt Studio", tag: "Branding", time: "4 weeks", image: mockStrutt.url },
@@ -127,7 +123,7 @@ function Index() {
     setErrors(next);
     if (Object.keys(next).length === 0) setSent(true);
   };
-  const H = ({ id, children, light }: { id?: string; children: React.ReactNode; light?: boolean }) => <h2 id={id} className={`display-h ${light ? "" : "text-primary"}`}>{children}</h2>;
+  const H = ({ id, children, light }: { id?: string; children: React.ReactNode; light?: boolean }) => <h2 id={id} className={`display-h ${light ? "" : "text-primary"}`}>{id === "awards-title" ? children : <WordReveal>{children}</WordReveal>}</h2>;
   return (
     <main>
       <div className="hero-stage relative">
@@ -142,7 +138,7 @@ function Index() {
         </header>
         {menuOpen && <nav className="mobile-nav absolute z-20 flex flex-col bg-primary" aria-label="Mobile navigation">{[...nav, ["Contact", "contact"] as [string, string]].map(([label, id]) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}<ArrowUpRight /></a>)}</nav>}
         <div className="hero-content relative z-10">
-          <h1>Make your brand<br />impossible to<br />overlook.</h1>
+          <h1><WordReveal>Make your brand<br />impossible to<br />overlook.</WordReveal></h1>
           <p className="hero-statement">From scroll-stopping social content to smarter digital marketing, we bring creative thinking and practical expertise together to help businesses grow online.</p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <Button asChild variant="secondary" className="hero-btn rounded-none"><a href="#work">VIEW OUR WORK <ArrowUpRight /></a></Button>
@@ -157,7 +153,7 @@ function Index() {
       <section id="services" className="slide-over section-shell bg-secondary py-36">
         <div className="text-center"><H>Our services</H></div>
         <div className="relative mt-20 flex flex-col items-center" onMouseLeave={() => setActiveService(null)}>
-          {services.map((s, i) => <a key={s.title} href="#contact" onMouseEnter={() => setActiveService(i)} onFocus={() => setActiveService(i)} className={`service-line thunder py-3 text-center text-5xl transition-colors duration-300 md:text-7xl ${activeService === null || activeService === i ? "text-foreground" : "text-muted-foreground/40"}`}>{s.title}</a>)}
+          {services.map((s, i) => <Link key={s.title} to="/services/$slug" params={{ slug: s.slug }} onMouseEnter={() => setActiveService(i)} onFocus={() => setActiveService(i)} className={`service-line thunder py-3 text-center text-5xl transition-colors duration-300 md:text-7xl ${activeService === null || activeService === i ? "text-foreground" : "text-muted-foreground/40"}`}>{s.title}</Link>)}
           {services.map((s, i) => <img key={s.title} src={s.image} alt="" aria-hidden className={`service-reveal ${activeService === i ? "is-on" : ""}`} style={{ top: `${i * 16.6 - 6}%` }} />)}
         </div>
       </section>
