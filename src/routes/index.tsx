@@ -78,10 +78,10 @@ const services = [
   { title: "Content Creation", line: "Give your brand something worth looking at.", image: serviceContent, alt: "Photographer on a product photoshoot set", items: ["Photography", "Videography", "Copywriting", "Blog content"], cta: "Explore content creation" },
 ];
 const showcase = [
-  { name: "Andere Lab", image: mockLaptop.url, cls: "md:col-span-7 aspect-[16/11]" },
-  { name: "Strutt Studio", image: mockStrutt.url, cls: "md:col-span-5 aspect-[4/5] md:mt-24" },
-  { name: "Nocturne Tablet", image: mockTablet.url, cls: "md:col-span-5 aspect-[4/5]" },
-  { name: "Strutt Product Details", image: mockProduct.url, cls: "md:col-span-7 aspect-[16/11] md:-mt-24 md:self-end" },
+  { name: "Andere Lab", tag: "Web Design", time: "6 weeks", image: mockLaptop.url },
+  { name: "Strutt Studio", tag: "Branding", time: "4 weeks", image: mockStrutt.url },
+  { name: "Nocturne Tablet", tag: "App Design", time: "5 weeks", image: mockTablet.url },
+  { name: "Strutt Product Details", tag: "UI/UX", time: "3 weeks", image: mockProduct.url },
 ];
 const steps = [
   { title: "Let's understand your goals", text: "We start with a conversation about your business, challenges and what you want to achieve." },
@@ -210,10 +210,14 @@ function Index() {
 
       <section id="work" className="deep section-shell py-36">
         <div className="mb-20"><H light>Good work<br />speaks for itself</H></div>
-        <div className="grid gap-8 md:grid-cols-12">
-          {showcase.map(p => <a key={p.name} href="#contact" className={`group relative block overflow-hidden ${p.cls}`}>
-            <img src={p.image} alt={`${p.name} project`} loading="lazy" className="work-img h-full w-full object-cover" />
-            <span className="overlay-tag absolute bottom-0 left-0 flex items-center gap-3">{p.name}<ArrowUpRight className="size-4" /></span>
+        <div className="grid gap-x-6 gap-y-16 md:grid-cols-2">
+          {showcase.map(p => <a key={p.name} href="#contact" className="group block border-b border-primary-foreground/20 pb-6">
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <img src={p.image} alt={`${p.name} project`} loading="lazy" className="work-img h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+              <span className="absolute bottom-4 right-4 bg-background/85 px-3 py-1 text-[11px] uppercase tracking-wide text-foreground">{p.tag}</span>
+            </div>
+            <p className="mt-4 text-sm opacity-60">{p.time}</p>
+            <h3 className="mt-2 flex items-center justify-between text-2xl font-medium uppercase">{p.name}<ArrowUpRight className="size-5 transition group-hover:-translate-y-1 group-hover:translate-x-1" /></h3>
           </a>)}
         </div>
       </section>
