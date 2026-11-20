@@ -130,6 +130,7 @@ function Index() {
   const H = ({ id, children, light }: { id?: string; children: React.ReactNode; light?: boolean }) => <h2 id={id} className={`display-h ${light ? "" : "text-primary"}`}>{children}</h2>;
   return (
     <main>
+      <div className="hero-stage relative">
       <section className="hero relative overflow-hidden bg-primary text-primary-foreground" id="home">
         <img className="hero-image absolute inset-y-0 right-0 h-full w-full object-cover" src={hero} alt="Sculptural silver nautilus spiral" width={1920} height={1024} />
         <div className="hero-tint absolute inset-0" aria-hidden />
@@ -160,6 +161,7 @@ function Index() {
           {services.map((s, i) => <img key={s.title} src={s.image} alt="" aria-hidden className={`service-reveal ${activeService === i ? "is-on" : ""}`} style={{ top: `${i * 16.6 - 6}%` }} />)}
         </div>
       </section>
+      </div>
 
       <section className="section-shell py-36" aria-labelledby="clients-title">
         <div className="grid gap-10 md:grid-cols-2 md:items-end"><H id="clients-title">Good company,<br />good work</H><p className="max-w-md text-muted-foreground">We've partnered with businesses across different industries, helping them build their digital presence through creative and strategic marketing.</p></div>
