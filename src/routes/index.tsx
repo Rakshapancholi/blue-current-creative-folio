@@ -131,7 +131,7 @@ function Index() {
   return (
     <main>
       <section className="hero relative overflow-hidden bg-primary text-primary-foreground" id="home">
-        <img className="hero-image absolute inset-y-0 right-0 h-full w-full object-cover md:w-[62%]" src={hero} alt="Sculptural silver nautilus spiral" width={1920} height={1024} />
+        <img className="hero-image absolute inset-y-0 right-0 h-full w-full object-cover" src={hero} alt="Sculptural silver nautilus spiral" width={1920} height={1024} />
         <div className="hero-tint absolute inset-0" aria-hidden />
         <header className="site-header relative z-10 flex items-center justify-between border-b border-primary-foreground/20">
           <a href="#home" aria-label="Nautilus Marketing home"><img src={logo.url} alt="Nautilus Marketing" className="nav-logo logo-light" width={181} height={48} /></a>
