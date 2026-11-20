@@ -305,3 +305,10 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; }
 .hero-image { object-position: 35% center; }
 .hero-image { object-fit: cover; object-position: 70% center; }
 .hero-tint { background: linear-gradient(90deg, var(--primary) 25%, color-mix(in oklch, var(--primary) 40%, transparent) 60%, transparent 100%); }
+
+/* Full shell + slide-over */
+.hero { position: sticky; top: 0; height: 100vh; min-height: 640px; z-index: 0; }
+.hero-image { object-fit: contain !important; object-position: right center !important; }
+.hero ~ section { position: relative; z-index: 1; }
+.slide-over { box-shadow: 0 -40px 80px -30px oklch(0.2 0.04 255 / 45%); }
+.service-reveal { right: 4%; }

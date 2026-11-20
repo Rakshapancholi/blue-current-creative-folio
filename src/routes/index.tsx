@@ -25,7 +25,7 @@ import testimonialClient from "@/assets/testimonial-client.jpg";
 import logo from "@/assets/brand/nautilus-logo.png.asset.json";
 import teamPhoto from "@/assets/brand/nautilus-team.png.asset.json";
 import clientLogos from "@/assets/brand/client-logos.png.asset.json";
-import featuredMedia from "@/assets/brand/featured-media.png.asset.json";
+import featuredMedia from "@/assets/brand/featured-grid.png.asset.json";
 import awardGlobal100 from "@/assets/brand/award-global-100.png.asset.json";
 import awardCLW from "@/assets/brand/award-corporate-livewire.png.asset.json";
 import awardMA from "@/assets/brand/award-ma-today.png.asset.json";
@@ -153,15 +153,10 @@ function Index() {
         </div>
       </section>
 
-      <section id="services" className="section-shell bg-secondary py-36">
-        <H>Our services</H>
-        <div className="relative mt-16 border-t border-border" onMouseLeave={() => setActiveService(null)}>
-          {services.map((s, i) => <a key={s.title} href="#contact" onMouseEnter={() => setActiveService(i)} onFocus={() => setActiveService(i)} className="service-line group grid grid-cols-[40px_1fr_auto] items-center gap-4 border-b border-border py-8 md:grid-cols-[70px_1fr_1fr_auto]">
-            <span className="text-[10px] text-muted-foreground">0{i + 1}</span>
-            <span className="thunder text-4xl transition-transform duration-500 group-hover:translate-x-3 md:text-5xl">{s.title}</span>
-            <span className="hidden text-sm text-muted-foreground md:block">{s.line}</span>
-            <span className="flex size-10 items-center justify-center rounded-full border border-border transition group-hover:bg-primary group-hover:text-primary-foreground"><ArrowUpRight className="size-4" /></span>
-          </a>)}
+      <section id="services" className="slide-over section-shell bg-secondary py-36">
+        <div className="text-center"><H>Our services</H></div>
+        <div className="relative mt-20 flex flex-col items-center" onMouseLeave={() => setActiveService(null)}>
+          {services.map((s, i) => <a key={s.title} href="#contact" onMouseEnter={() => setActiveService(i)} onFocus={() => setActiveService(i)} className={`service-line thunder py-3 text-center text-5xl transition-colors duration-300 md:text-7xl ${activeService === null || activeService === i ? "text-foreground" : "text-muted-foreground/40"}`}>{s.title}</a>)}
           {services.map((s, i) => <img key={s.title} src={s.image} alt="" aria-hidden className={`service-reveal ${activeService === i ? "is-on" : ""}`} style={{ top: `${i * 16.6 - 6}%` }} />)}
         </div>
       </section>
@@ -188,8 +183,8 @@ function Index() {
       </section>
 
       <section className="deep section-shell py-24" aria-labelledby="featured-title">
-        <div className="grid items-center gap-12 md:grid-cols-[1fr_3fr]"><H id="featured-title" light>Featured in</H>
-          <img src={featuredMedia.url} alt="Featured in Forbes, Yahoo Finance, Content Marketing Institute, The Drum, GoDaddy and HubSpot" className="w-full" loading="lazy" /></div>
+        <div className="flex flex-col items-center gap-12 text-center"><H id="featured-title" light>Featured in</H>
+          <img src={featuredMedia.url} alt="Featured in Forbes, Yahoo Finance, Content Marketing Institute, The Drum, GoDaddy and HubSpot" className="w-full max-w-6xl" loading="lazy" /></div>
       </section>
 
       <section id="about" className="section-shell py-36">
